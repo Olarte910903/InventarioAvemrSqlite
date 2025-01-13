@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Agregar Item";
+}
+
+<h1 class="display-6 mt-3"><b>CREAR ITEM</b></h1>
+
+<div class="container-fluid">
+    <form class="col-12 col-md-6 col mx-auto" method="post" asp-action="Create" asp-asp-controller="Item" id="item-form">
+        <div class="container-fluid">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" />
+            <div id="nameHelp" class="form-text">Ingrese el nombre del item</div>
+        </div>
+        <div class="container-fluid">
+            <label for="description" class="form-label">Descripción</label>
+            <input type="text" class="form-control" id="description" name="description" aria-describedby="decriptionHelp" />
+            <div id="descriptionHelp" class="form-text">Ingrese la descripción del elemento</div>
+        </div>
+        <div class="container-fluid">
+            <label for="amount" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" id="amount" name="amount" aria-describedby="amountHelp" />
+            <div id="amountHelp" class="form-text">Ingrese la cantidad del item</div>
+        </div>
+        <div class="container-fluid">
+            <label for="price" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="price" name="price" aria-describedby="priceHelp" />
+            <div id="priceHelp" class="form-text">Ingrese el precio del item</div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    </form>
+</div>
+
+<div id="error-message" style="color:red;"></div>
+
+@section Scripts {
+    <script src="~/js/Validation.js" asp-append-version="true"></script>
+}

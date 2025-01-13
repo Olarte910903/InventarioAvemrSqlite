@@ -1,0 +1,1 @@
+﻿var updateModal = document.getElementById('updateModal');

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<InventarioAvemrSqlite.Models.Item>
+@{
+    ViewData["Title"] = "Inventario";
+}
+<div>
+        <table class="table table-striped">
+            <thead>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Valor Total</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                <tr class="@(item.Amount == 0 ? "bg-danger text-white" : "text-black")">
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Amount</td>
+                    <td>$ @item.Price</td>
+                    <td>$ @(@item.Price * @item.Amount)</td>
+                    <td>
+                        <button type="button" class="btn btn-danger @(item.Amount == 0 ? "btn-outline-light" : null)" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="@item.Id" data-name="@item.Name">
+                            Eliminar
+                        </button>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal" data-id="@item.Id" data-name="@item.Name" data-amount="@item.Amount" data-price="@item.Price">
+                            Modificar
+                        </button>
+                    </td>
+
+                </tr>
+
+                }
+            </tbody>
+        </table>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Está seguro que desea eliminar el item?
+      </div>
+      <div class="modal-footer">
+          <form method="post">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+    
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateModalLabel">Eliminar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="container-fluid">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" />
+                        <div id="nameHelp" class="form-text">Ingrese el nombre del item</div>
+                    </div>
+                    <div class="container-fluid">
+                        <label for="description" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="description" name="description" aria-describedby="decriptionHelp" />
+                        <div id="descriptionHelp" class="form-text">Ingrese la descripción del elemento</div>
+                    </div>
+                    <div class="container-fluid">
+                        <label for="amount" class="form-label">Cantidad</label>
+                        <input type="number" class="form-control" id="amount" name="amount" aria-describedby="amountHelp" />
+                        <div id="amountHelp" class="form-text">Ingrese la cantidad del item</div>
+                    </div>
+                    <div class="container-fluid">
+                        <label for="price" class="form-label">Precio</label>
+                        <input type="number" class="form-control" id="price" name="price" aria-describedby="priceHelp" />
+                        <div id="priceHelp" class="form-text">Ingrese el precio del item</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/DeleteModal.js" asp-append-version="true"></script>
+    <script src="~/js/UpdateModal.js" asp-append-version="true"></script>
+}
+
